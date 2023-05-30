@@ -1,81 +1,43 @@
-# Data Management Project
+# Data Management
 
 import json
 
-# Load Json file and create empty dictionary. Runs the function even if there is an error. 
-try: 
-    with open("users.json", "r") as f:
-        users = json.load(f)
-except FileNotFoundError:
-    users = {}
+def displayData():
+    for i in songs:
+        print("Title: ", i["title"])
+        print("Artist: ", i["artist"])
+        print("Genre: ", i["genre"])
 
-# Sign up function and save the username and password to json file for login
-def signup():
-    while True:
-        username = input("Enter your desired username: ")
-        if username in users:
-            print("Username already taken.")
-        else: 
-            password = input("Enter your password: ")
-            users[username] = {"password": password}
-            with open("users.json", "w") as f:
-                json.dump(users, f)
-            print("Signup successful!")
-            break
-
-
-# Ask the user for their username and password
-def login():
-    while True:
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
-
-    # Check if the username and password exist
-        user = users.get(username)
-        if user and user["password"] == password:
-            print("Login successful!")
-            break
-        else:
-            print("Invalid username or password. Please try again.")
-
-# Signup or login menu
-while True:
-    print("1. Signup")
-    print("2. Login")
-    choice = input("Enter a selection (1-2): ")
-
-    if choice == 1:
-        signup()
-    elif choice == 2:
-        login()
-    else: 
-        print("Please enter either 1 or 2")
-
-
-
-
-
-
-
-
+def filterData():
+    filter = input("Filter songs by artist: ").lower()
+    found = False
+    for i in songs:
+        if filter == i["artist"].lower():
+            found = True
+            print(i["title"], i["artist"], i["genre"])
+    if not found:
+        print("Artist not found.")
     
+def selectionSort(anArray):
+    for i in range(len(anArray) - 1):
+        minPoistion = i
+        for n in range(i+1, len(anArray)):
+            if anArray[n]["title"] < anArray[minPoistion]["title"]:
+                minPoistion = n
+        anArray[i], anArray[minPoistion] = anArray[minPoistion], anArray[i]
 
 
+def newSong(title, artist, genre):
+	return {
+		"title": title,
+		"artist": artist,
+		"genre": genre
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+songs = []
+songs.append(newSong("God's Plan", "Drake", "Rap"))
+songs.append(newSong("Mask Off", "Future", "Rap"))
+songs.append(newSong("Ghost", "Justin Bieber", "RnB"))
 
 
 
