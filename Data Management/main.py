@@ -2,6 +2,28 @@
 
 import json
 
+def loginmenu():
+    print("1. Signup")
+    print("2. Login")
+    return int(input("Enter a selection (1-2): "))
+     
+def login():
+     choice = loginmenu
+
+     if choice == 1:
+        username = input("Enter your desired username: ")
+        password = input("Enter your desired password: ")
+
+        with open("users.json", "r") as f:
+            data = json.load(f)
+            if username in data:
+                print("Username already exists.")
+                return
+        
+        with open("users.json", "w") as f:
+            data[username] = password
+            json.dump(data, f)
+
 def displayData():
     for i in songs:
         print("Title: ", i["title"])
@@ -26,6 +48,15 @@ def selectionSort(anArray):
                 minPoistion = n
         anArray[i], anArray[minPoistion] = anArray[minPoistion], anArray[i]
 
+def addfav():
+    pass 
+
+def newUser(username, password):
+	return {
+		"username": username,
+		"password": password,
+		"faves": [ ]
+	}
 
 def newSong(title, artist, genre):
 	return {
@@ -33,6 +64,7 @@ def newSong(title, artist, genre):
 		"artist": artist,
 		"genre": genre
 	}
+
 
 songs = []
 songs.append(newSong("God's Plan", "Drake", "Rap"))
