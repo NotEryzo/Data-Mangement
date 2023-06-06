@@ -66,6 +66,7 @@ def login(userdata):
     print("Invalid username or password.")
     return None
 
+# Logout function
 def logout():
   print("Logout Successfully!")
   mainLogin()
