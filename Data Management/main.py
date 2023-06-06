@@ -55,16 +55,16 @@ def signup(userdata):
 
 # Login function
 def login(userdata):
-  username = input("Enter your username: ").lower()
-  password = input("Enter your password: ").lower()
+    username = input("Enter your username: ").lower()
+    password = input("Enter your password: ").lower()
 
-  for user in userdata:
-    if user["username"] == username and user["password"] == password:
-      print("Login Successful!")
-      return user
+    for user in userdata:
+        if user["username"] == username and user["password"] == password:
+            print("Login Successful!")
+            return user
 
     print("Invalid username or password.")
-    return 
+    return None
 
 def logout():
   print("Logout Successfully!")
